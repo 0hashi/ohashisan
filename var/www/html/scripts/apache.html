@@ -1,0 +1,64 @@
+<head>
+<title>Below Ground</title>
+</head>
+<center>
+<table width=1100 border=0>
+	<tr>
+		<td colspan=2><hr>
+			<h3><b>Below Ground and the DW</b></h3>
+			<a href="index.html">Ohashisan</a> |
+			<a href="certs.html">Certs</a> |
+			<a href="commo.html">Commo</a> |
+			<a href="googledorkcheatsheet.html">Google Dorking</a> | 
+			<a href="scripts.html">Scripts</a> |
+			<a href="http://t7mdxxegiaz3jxbk3n6j44eujasg2pjydfqoivm7ekwvcrouje3jucid.onion/thedarkside.html">The Dark Side</a> 
+		<hr>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<center><h3>Apache</h3></center><br>
+
+#!/usr/bin/python<br>
+#<br>
+# Script: apache<br>
+# This script is a wrapper for systemctl to manage the Apache2 service on kali00. I wrote this to help with<br>
+# multiple stops, starts, restarts of the Apache2 web server. Doesn't do much but it makes work a little<br>
+# faster for me.<br>
+#<br>
+# The PassPhrase for the SSL cert is: pe---------se (needed to start the service)<br>
+#<br>
+<br>
+import sys<br>
+import subprocess<br>
+<br>
+if len(sys.argv) == 1:<br>
+        print ('You need more than', len(sys.argv), 'argument. Usage apache [status|start|stop|restart]')<br>
+        sys.exit(1)<br>
+<br>
+if str(sys.argv) != 'start' or str(sys.argv) != 'stop' or str(sys.argv) != 'status' or str(sys.argv) != 'restart':<br>
+        print ('Usage: apache <status|start|stop|restart>')<br>
+<br>
+if str(sys.argv[1]) == 'start':<br>
+        print ('Gonna start apache', str(sys.argv[1]))<br>
+        cmd_str = "systemctl enable apache2;systemctl start apache2"<br>
+        subprocess.run(cmd_str, shell=True)<br>
+<br>
+elif str(sys.argv[1]) == 'stop':<br>
+        print ('Gonna stop apache')<br>
+        cmd_str = "systemctl stop apache2;systemctl disable apache2"<br>
+        subprocess.run(cmd_str, shell=True)<br>
+<br>
+elif str(sys.argv[1]) == 'restart':<br>
+    print ('Gonna restart apache')<br>
+    cmd_str = "systemctl restart apache2"<br>
+    subprocess.run(cmd_str, shell=True)<br>
+<br>
+elif str(sys.argv[1]) == 'status':<br>
+    print ('Checking apache status')<br>
+    cmd_str = "systemctl status apache2"<br>
+    subprocess.run(cmd_str, shell=True)<br>
+<br>
+</table><br>
+</body><br>
+</html><br>

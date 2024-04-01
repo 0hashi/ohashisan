@@ -1,0 +1,216 @@
+<head>
+<title>Below Ground</title>
+</head>
+<center>
+<table width=1100 border=0>
+	<tr>
+		<td colspan=2><hr>
+			<h3><b>Below Ground and the DW</b></h3>
+			<a href="index.html">Ohashisan</a> |
+			<a href="certs.html">Certs</a> |
+			<a href="commo.html">Commo</a> |
+			<a href="googledorkcheatsheet.html">Google Dorking</a> | 
+			<a href="scripts.html">Scripts</a> |
+			<a href="http://t7mdxxegiaz3jxbk3n6j44eujasg2pjydfqoivm7ekwvcrouje3jucid.onion/thedarkside.html">The Dark Side</a> 
+		<hr>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<center><h3>Authentication Services install</h3></center><br><br>
+
+#!/usr/bin/perl<br>
+#<br>
+#	Paul Ohashi<br>
+#	One Identity<br>
+#	Jan '18<br>
+#<br>
+#	qasinstall.pl - Perl script that installs or removes Authentication Services client and<br>
+#	Group Policy client then joins the system to Active Directory. This script can also<br>
+#	create the Active Directory service principle account and keytab file.<br>
+#<br>
+#	NOTE: GRANT THE SERVICE PRINCIPLE ACCOUNT PERMISSIONS TO JOIN SYSTEMS TO ACTIVE DIRECTORY<br>
+#<br>
+#	The installation and removal are performed using an existing AD Service Principle and <br>
+#	Kerberos keytab file.<br>
+#<br>
+#	This script is provided "as is", without warranty or support of any kind. Permission is granted,<br>
+#	free of charge, to any person obtaining a copy of this script, to modify its contents without<br>
+#	restriction, merge, publish or distribute. Enjoy!<br>
+#<br>
+#	NOTE: Windows Service Principle name max 20 characters (including hostname-).<br>
+#<br>
+<br>
+use strict;<br>
+use feature "switch";<br>
+<br>
+#	NOTE: The value of $pasuMedia must exist in the $pasuMediaPath directory.<br>
+##### CONFIG<br>
+my $realm		= 'reddirt.lab';<br>
+my $domain		= 'reddirt.lab';<br>
+my $dcIPs		= '192.168.1.33 192.168.1.133';		# '1.2.3.4 1.2.3.5'<br>
+my $pasuMedia		= 'QAS_4_1_5_23233.tar.gz';<br>
+my $pasuMediaPath	= '/root/downloads/pasu/latestVersionOfQAS';<br>
+my $servicePrinciple	= 'ohashisan-joinunix';	# Prefix $servicePrinciple with "hostname-". Like: hostname-serviceprinciple<br>
+my $keytabFile		= './joinunix.keytab';<br>
+##### CONFIG<br>
+my $pasuSoftwareDir	= $pasuMedia;$pasuSoftwareDir =~ s/\..*$//g;<br>
+my ($licenseFile,$Administrator,$sAMAccountName,$dontDeleteDirs,$dontUnJoin,$extension);<br>
+my ($qasClientPkg,$vgpClientPkg);<br>
+my $underscore		= "_";<br>
+my $clientVersion	= $pasuMedia;<br>
+$clientVersion		=~ s/QAS_|\..*$//g;<br>
+$clientVersion          =~ s/_/\./g;<br>
+<br>
+my ($majorV, $minorV, $bugFixRelease, $buildNumber)	= split(/\./, $clientVersion);<br>
+$clientVersion		= "$majorV.$minorV.$bugFixRelease-$buildNumber";<br>
+<br>
+# Figure out what flavor of Linux<br>
+my $flavor		= `cat /proc/version`;<br>
+<br>
+if ($flavor =~ "Ubuntu") {<br>
+	&nbsp&nbsp&nbsp&nbsp$flavor			= "ubuntu";<br>
+	&nbsp&nbsp&nbsp&nbsp$extension		= 'i386.deb';<br>
+	&nbsp&nbsp&nbsp&nbsp$qasClientPkg	= "$pasuMediaPath/$pasuSoftwareDir/client/linux-x86/vasclnt_${clientVersion}_${extension}";<br>
+	&nbsp&nbsp&nbsp&nbsp$vgpClientPkg	= "$pasuMediaPath/$pasuSoftwareDir/client/linux-x86/vasgp_${clientVersion}_${extension}";<br>
+}<br>
+<br>
+elsif ($flavor =~ "Red Hat") {<br>
+	&nbsp&nbsp&nbsp&nbspprint "FLAVOR: $flavor\n";<br>
+}<br>
+else {<br>
+	&nbsp&nbsp&nbsp&nbspprint "qasinstall.pl can't find your operating system\n";<br>
+}<br>
+<br>
+my $vastool		= '/opt/quest/bin/vastool';<br>
+my $DOMAIN		= $domain;$DOMAIN =~ s/\..*//g;<br>
+my $adContainer		= "CN=Computers,DC=${DOMAIN},DC=hq";<br>
+my $qasClient		= 'vasclnt';<br>
+my $vgpClient		= 'vasgp';<br>
+system("clear");<br>
+<br>
+my $numArgs		= $#ARGV + 1;<br>
+if ($numArgs == 0) {<br>
+	&nbsp&nbsp&nbsp&nbspusage();<br>
+	&nbsp&nbsp&nbsp&nbspexit 1;<br>
+}<br>
+else<br>
+{<br>
+	if (! -d "$pasuMediaPath/$pasuSoftwareDir") {&gunZip();}<br>
+	&nbsp&nbsp&nbsp&nbspmy $theArg	= $ARGV[0];<br>
+	&nbsp&nbsp&nbsp&nbspmy $i	= 0;<br>
+	&nbsp&nbsp&nbsp&nbspmy ($j);<br>
+	&nbsp&nbsp&nbsp&nbspgiven($theArg) {<br>
+		&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspwhen (/^-h|--help$/i)    {&usage();exit 2;}<br>
+		&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspwhen (/^-r|--remove/i)   {&remove($qasClient,$vgpClient);}<br>
+		&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspwhen (/^-i|--install/i) {<br>
+<br>
+			# Check for DN (-c)<br>
+			&nbsp&nbsp&nbsp&nbspwhile (@ARGV) {<br>
+				if($ARGV[$i] =~ '-c') {$j = $i + 1;$adContainer="$ARGV[$j]";}<br>
+                		if($ARGV[$i] =~ '-l') {$j = $i + 1;$licenseFile="$ARGV[$j]";}<br>
+				last if($i == $numArgs -1);<br>
+				$i++;<br>
+			}<br>
+<br>
+			# Install QAS and Group Policy clients<br>
+			system("dpkg -i $qasClientPkg;dpkg -i $vgpClientPkg");<br>
+<br>
+			# Configure realm and create vas.conf<br>
+			system("$vastool configure realm $realm $dcIPs");<br>
+<br>
+			# Join the system to AD<br>
+			#print "\n\nJOIN: $vastool -u $servicePrinciple -k $keytabFile join -f -c $adContainer -f $domain\n\n";<br>
+			system("$vastool -u $servicePrinciple -k $keytabFile join -f -c $adContainer -f $domain");<br>
+<br>
+			if($licenseFile) {&addLicense();} <br>
+		}<br>
+		default	{print "\n\n";}<br>
+	}<br>
+<br>
+	if($theArg =~ /-s|--service/) {<br>
+		while (@ARGV) {<br>
+                	if($ARGV[$i] =~ '-u') {$j = $i + 1;$Administrator="$ARGV[$j]";}<br>
+                	if($ARGV[$i] =~ '-a') {$j = $i + 1;$sAMAccountName="$ARGV[$j]";}<br>
+                	last if($i == $numArgs -1);<br>
+                	$i++;<br>
+                }<br>
+<br>
+		if(!defined $Administrator or !defined $sAMAccountName) {&usage();exit 3;}<br>
+		# Install QAS and Group Policy clients<br>
+		system("dpkg -i $qasClientPkg;dpkg -i $vgpClientPkg");<br>
+<br>
+		# Configure realm and create vas.conf<br>
+		system("$vastool configure realm $realm $dcIPs");<br>
+<br>
+		# Create the AD Service Principle keytab file<br>
+		system("vastool -u $Administrator service create $sAMAccountName/$domain");<br>
+		system("mv /etc/opt/quest/vas/${sAMAccountName}.keytab .");<br>
+		#$dontDeleteDirs	= 'true';<br>
+		#$dontUnJoin	= 'true';<br>
+		#&remove($qasClient,$vgpClient,$dontDeleteDirs,$dontUnJoin);<br>
+	}<br>
+<br>
+	# Add a license for Authentication Services<br>
+	if($theArg eq '-l') {<br>
+		$j = $i + 1;<br>
+		$licenseFile="$ARGV[$j]";<br>
+		while (@ARGV) {<br>
+                	if($ARGV[$i] =~ '-a') {$j = $i + 1;$Administrator="$ARGV[$j]";}<br>
+                	last if($i == $numArgs -1);<br>
+                	$i++;<br>
+                }<br>
+		&addLicense($Administrator,$licenseFile);<br>
+	}<br>
+}<br>
+<br>
+sub gunZip($pasuMedia,$pasuMediaPath) {<br>
+	system("cd $pasuMediaPath;tar zxf $pasuMediaPath/$pasuMedia");<br>
+}<br>
+<br>
+sub remove($qasClient,$vgpClient) {<br>
+	if($dontUnJoin ne 'true') {system("$vastool -u $servicePrinciple -k $keytabFile unjoin");}<br>
+	system("dpkg --purge $qasClient $vgpClient");<br>
+	if($dontDeleteDirs ne 'true') {system("rm -fr /opt/quest /etc/opt/quest /var/opt/quest");}<br>
+	exit;<br>
+}<br>
+<br>
+sub addLicense() {<br>
+		system("$vastool license add $licenseFile >/dev/null 2>&1");<br>
+}<br>
+<br>
+sub usage() {<br>
+print "\nUsage: qasinstall.pl [-r|--remove] [-i|--install] [-c container] [-h|--help]<br><br>
+<br>
+-i|--install - Install Authentication Services and Group Policy Clients<br>
+	       and join system to Active Directory.<br>
+<br>
+-c container - Use only with -i. Default container: CN=Computers,DC=DOMAIN,DC=com<br>
+<br>
+-l|--license - Add/Update Authentication Services license<br>
+<br>
+-r|--remove  - Remove Authentication Services and Group Policy packages<br>
+	       and delete PASU configuration directories.<br>
+<br>
+-s	     - Create Service Principle account and Kerberos keytab file.<br>
+<br>
+-h|--help    - Display this usage.<br>
+<br>
+Example:	<br>
+<br>
+Install QAS:<br>
+		qasinstall.pl -i<br>
+		qasinstall.pl -i -l <license file><br>
+		qasinstall.pl -i -c OU=Ubuntu,OU=Linux,OU=Servers,OU=AuthenticationSerices,DC=ohashisan,DC=hq<br>
+		qasinstall.pl -i -c OU=Ubuntu,OU=Linux,OU=Servers,OU=AuthenticationSerices,DC=ohashisan,DC=hq -l <license file><br>
+Remove QAS:<br>
+		qasinstall.pl -r<br>
+<br>
+Create Service Principle:<br>
+		qasinstall.pl -s -u <Administrator> -a <Service Principle>\n\n";<br>
+}<br>
+<br>
+</table>
+</body>
+
+</html>

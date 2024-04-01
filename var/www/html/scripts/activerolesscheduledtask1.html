@@ -1,0 +1,62 @@
+<head>
+<title>Below Ground</title>
+</head>
+<center>
+<table width=1100 border=0>
+	<tr>
+		<td colspan=2><hr>
+			<h3><b>Below Ground and the DW</b></h3>
+			<a href="/index.html">Ohashisan</a> |
+			<a href="/certs.html">Certs</a> |
+			<a href="/commo.html">Commo</a> |
+			<a href="/googledorkcheatsheet.html">Google Dorking</a> | 
+			<a href="/scripts.html">Scripts</a> |
+			<a href="http://t7mdxxegiaz3jxbk3n6j44eujasg2pjydfqoivm7ekwvcrouje3jucid.onion/thedarkside.html">The Dark Side</a> 
+		<hr>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<center><h3>Active Roles Scheduled Task to deprovision inactive user accounts</h3></center><br><br>
+$lastLogonThreshold = (Get-Date).AddDays(-30)<br>
+$domain = "reddirt"<br>
+$ouDN = "OU=Users,OU=NAM,OU=Enterprise,OU=www.reddirt.lab,OU=Active Roles,OU=Solutions,DC=reddirt,DC=lab"<br>
+$users = Get-ADUser -Filter * -Properties lastLogon -SearchBase $ouDN<br>
+$infoNotes = "Last logged on more than 30 days ago "<br>
+$attributeName = 'info'<br>
+<br>
+# $limit is the max number of accounts that will be deprovisioned on each run. Remove $counter, $limit<br>
+# and the first if block in the foreach loop to deprovision all inactive user accounts in the defined <br>
+# OU ($ouDN).<br>
+<br>
+$counter = 0<br>
+$limit = 10<br>
+<br>
+foreach ($user in $users) {<br>
+    # Delete if block to deprovision all inactive user accounts in the defined OU ($ouDN)<br>
+    $counter++<br>
+    if ($counter -ge $limit) {<br>
+        break<br>
+    }<br>
+<br>
+    $lastLogonValue = [System.DateTime]::FromFileTime($user.lastLogon)<br>
+<br>
+    if ($lastLogonValue -lt $lastLogonThreshold) {<br>
+        Set-ADUser -Identity $user -Replace @{$attributeName = "$infoNotes $lastLogonValue"}<br>
+        $strUserPath = "EDMS://" + $user<br>
+        $ss = ""<br>
+        #Bind to the user object<br>
+        $User = [ADSI]$strUserPath<br>
+        #Deprovision the user account<br>
+        $User.Put("edsvaDeprovisionType", 1)<br>
+        $User.SetInfo()<br>
+    } else {<br>
+        Set-ADUser -Identity $user -Replace @{$attributeName = "Last logon: $lastLogonValue"}<br>
+    }<br>
+}<br>
+
+
+</table>
+</body>
+
+</html>

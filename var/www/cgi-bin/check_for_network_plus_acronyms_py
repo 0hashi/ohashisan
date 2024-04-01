@@ -1,0 +1,22 @@
+#!/usr/bin/python
+
+import time
+import psutil
+
+while True:
+    process = psutil.pids()
+    for id in process:
+        proc = psutil.Process(id)
+        #print(proc.name())
+        if proc.name() == "network_plus_ac":
+            print(proc)
+            time.sleep(10)
+            #break
+        else:
+            print(proc.name())
+            break
+        
+
+
+
+

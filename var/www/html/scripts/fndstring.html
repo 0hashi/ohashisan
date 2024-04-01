@@ -1,0 +1,107 @@
+<head>
+<title>Below Ground</title>
+</head>
+<center>
+<table width=1100 border=0>
+	<tr>
+		<td colspan=2><hr>
+			<h3><b>Below Ground and the DW</b></h3>
+			<a href="index.html">Ohashisan</a> |
+			<a href="certs.html">Certs</a> |
+			<a href="commo.html">Commo</a> |
+			<a href="googledorkcheatsheet.html">Google Dorking</a> | 
+			<a href="scripts.html">Scripts</a> |
+			<a href="http://t7mdxxegiaz3jxbk3n6j44eujasg2pjydfqoivm7ekwvcrouje3jucid.onion/thedarkside.html">The Dark Side</a> 
+		<hr>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<center><h3>fndstring</h3></center><br>
+
+
+#!/usr/bin/ksh<br>
+#<br>
+#<br>
+#       Code: Paul Ohashi, Quest Software<br>
+#       Date: April 7, 2003<br>
+#<br>
+#       fndstring recursively searches directories for<br>
+#       files containing a string.<br>
+#<br>
+#<br>
+theList='fndstring.lst'<br>
+[[ -f ${theList} ]] && rm -f ${theList}<br>
+theLog='fndstring.log'<br>
+[[ -f ${theLog} ]] && rm -f ${theLog}<br>
+set -A foundStringIn<br>
+set -A timeBar<br>
+filesSearched=1<br>
+bars=0<br>
+pctDone=0<br>
+numFound=0<br>
+cnt=0<br>
+#theSmile="\\001"<br>
+theSmile="|"<br><br>
+
+clear<br><br>
+
+print "\n\n\n\tCollecting information...\n"<br><br>
+find . -type f -print > ${theList}<br>
+lastFile=`tail -1 ${theList}`<br>
+numFilesToCheck=`wc -l ${theList}|awk '{print $1}'`<br>
+numOfTimeBars = ${numFilesToCheck} / 10<br><br>
+<br>
+function theDisplay {<br>
+        clear<br>
+        if [[ ${cnt} -ge ${numOfTimeBars} || ${pctDone} -eq 100 ]] ; then<br>
+           cnt=0<br>
+           [[ ${pctDone} -lt 100 ]] && (( pctDone = ${pctDone} + 10 ))<br>
+           (( bars = ${bars} + 1 ))<br>
+           #timeBar[${bars}]='|'<br>
+           timeBar[${bars}]=${theSmile}<br>
+        fi<br>
+        print -n "\n\n\n\n\tLooking for \"${theString}\" in: ${theFile}\n\n\tStatus ${pctDone}% complete: "<br>
+        #print -n "\\033[0;44m"<br>
+        for i in ${timeBar[*]} ; do<br>
+           print -n "${timeBar[${bars}]}"<br>
+        done<br><br>
+
+        #print -n "\\033[0;38m\n\n\tFiles searched: ${filesSearched} out of: ${numFilesToCheck}\n\n"<br>
+
+        print -n "\n\n\tFiles searched: ${filesSearched} out of: ${numFilesToCheck}\n\n"<br>
+
+        [[ ${numFound} -gt 0 ]] && print -n "\tFound \"${theString}\" in ${numFound} file(s)\n\n"<br>
+
+       (( cnt = ${cnt} + 1 ))<br>
+
+}<br><br>
+
+clear<br>
+print -n "\n\n\n\t"<br><br>
+
+read theString?"Enter search string: "<br>
+cat ${theList}|while read lineIn ; do<br>
+ if [[ ${lineIn} = "./${theList}" || ${lineIn} = "./${theLog}" ]] ; then<br>
+    continue<br>
+ else<br>
+    theFile=${lineIn}<br>
+    (( filesSearched = ${filesSearched} + 1 ))<br>
+    theDisplay<br>
+    strings ${theFile}|grep -il "${theString}"|grep -v grep 2> /dev/null<br>
+    if [[ $? = 0 ]] ; then<br>
+       foundStringIn[${numFound}]=`echo ${theFile}|sed 's/\.\///g'`<br>
+       print "Found \"${theString}\" in: ${foundStringIn[${numFound}]}" >> ${theLog}<br>
+       (( numFound = ${numFound} + 1 ))<br>
+    fi<br>
+ fi<br>
+done<br><br>
+
+rm -f ${theList}<br><br>
+
+[[ -s ${theLog} ]] && print "\n\t*** View ${theLog} for a list of files containing \"${theString}\". ***\n"<br>
+
+</table><br>
+</body><br>
+
+</html><br>

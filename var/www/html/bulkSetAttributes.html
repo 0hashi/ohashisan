@@ -1,0 +1,53 @@
+<head>
+<title>Below Ground</title>
+</head>
+<center>
+<table width=1100 border=0>
+	<tr>
+		<td colspan=2><hr>
+			<h3><b>Below Ground and the DW</b></h3>
+			<a href="index.html">Ohashisan</a> |
+			<a href="certs.html">Certs</a> |
+			<a href="commo.html">Commo</a> |
+			<a href="googledorkcheatsheet.html">Google Dorking</a> | 
+			<a href="scripts.html">Scripts</a> |
+			<a href="http://t7mdxxegiaz3jxbk3n6j44eujasg2pjydfqoivm7ekwvcrouje3jucid.onion/thedarkside.html">The Dark Side</a> 
+		<hr>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<center><h3>Bulk Set-ADUser attributes for all users in defined OU</h3></center><br><br>
+
+# Bulk Set-ADUser attribute for all users in defined OU<br>
+# Import the Active Directory module<br>
+<br>
+Import-Module ActiveDirectory<br>
+<br>
+# Define the OU path where you want to list and update users<br>
+$ouPath = "OU=Users,OU=NAM,OU=Enterprise,OU=www.reddirt.lab,OU=Active Roles,OU=Solutions,DC=reddirt,DC=lab"<br>
+<br>
+# Define the value you want to set for the Office attribute<br>
+$newOfficeValue = "NAM"<br>
+<br>
+# Get a list of users in the specified OU<br>
+$users = Get-ADUser -Filter * -SearchBase $ouPath<br>
+<br>
+# Loop through each user and set the Office attribute<br>
+foreach ($user in $users) {<br>
+    # Display the user's current attributes (optional)<br>
+    Write-Host "Current Office attribute for $($user.Name): $($user.Office)"<br>
+<br>
+    # Set the new Office attribute value<br>
+    Set-ADUser -Identity $user -Office $newOfficeValue<br>
+<br>
+    # Display a confirmation message (optional)<br>
+    Write-Host "Updated Office attribute for $($user.Name) to $newOfficeValue"<br>
+}<br>
+<br>
+# Optional: Display a completion message<br>
+Write-Host "Script completed."<br>
+<br>
+</table>
+</body>
+</html>
