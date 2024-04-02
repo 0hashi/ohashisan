@@ -1,0 +1,128 @@
+<head>
+<title>Below Ground</title>
+</head>
+<body>
+<center>
+<table width=1100 border=0>
+        <tr>
+                <td colspan=2><hr>
+                        <h3><b>Below Ground - Network+ notes</b></h3>
+                        <a href="../index.html">Ohashisan</a> |
+                        <a href="../bloghts/bloghts.html">Bloghts</a> |
+                        <a href="../certs/certs.html">Certs</a> |
+                        <a href="../commo/commo.html">Commo</a> |
+                        <a href="../google/googledorkcheatsheet.html">Google Dorking</a> |
+                        <a href="../scripts/scripts.html">Scripts</a> |
+                        <a href="../tech/tech.html">Tech</a> |
+                        <a href="http://t7mdxxegiaz3jxbk3n6j44eujasg2pjydfqoivm7ekwvcrouje3jucid.onion/thedarkside.html">The Dark Side</a>
+                <hr>
+                </td>
+        </tr>
+        <tr>
+                <td  align=left valign=top>
+			<p>
+			<h2>IP Addresses</h2>
+			There's a lot of stuff involved with IP addresses and it's not the easiest part of networking... There's 
+			the binary system, the base(2) system, the decimal system, there are bits and bytes, there are
+			octets, there are classes A, B, C, D and E, and a few other things involved with getting one computer 
+			to communicate with antother.<p>
+
+			I'm sure I left a few things out, or just forgot to mention so we'll use what I have listed to get started.<p>
+
+			<li>1 binary number is a "bit" (0 or 1).
+			<li>8 bits = 1 byte (00000000 or 11111111).
+			<li>1 octet = 1 byte (11111111.00000000.octet.octet).
+			<li>An IP address/subnet mask has 4 octets (IP address: 192.168.1.1/255.255.255.0).
+			<li>There are 256 (0 - 255) possibilities for each octet.<p>
+
+			
+			Now, let's start with the image below. Using the full range of possibilities (256) divided in half
+			(= 128), then divide the quotient in half 7 times, then put each result in its own column (like the table
+			below) you'll have everything you need to convert binary to decimal for each octet in an IPv4 address.<p>
+
+			<p><center><img src="./pics/ip_addressing.jpg" width=40%></center><p>
+
+			There are a couple ranges when it comes to Public ("routable") IP addresses -vs- Private IP addresses
+			("non-routable"). I try to show those ranges in the table below.
+
+		</td>
+		<tr><td>
+			<center>
+			<table border=1>
+			<tr>
+			<td width=300 valign=top>
+			<b>Public Ranges</b><p>
+				A. 1 - 126 (except for 10.x.x.x)<br>
+				B. 128 - 191 (except for 172.(16 - 31).x.x<br>
+				C. 192 - 223 (except for 192.168.x.x)<br>
+				D. 224 - 239<br>
+				E. 240 - 255
+			</td><td width=300 valign=top>
+			<b>Private Ranges</b><p>
+				A. 10.x.x.x (10.0.0.0 - 10.255.255.255)<br>
+				B. 172.(16 - 31).x.x<br>
+				C. 192.168.x.x<br>
+				D. Who uses class D?<br>
+				E. Who ever heard of class E?<p>
+			</td></tr>
+			<tr><td colspan=2>
+				If you're familiar with converting decimal to binary, there may be an easier way to figure out what class
+				an IP address is...at least for me it's easier than trying to remember class ranges (1 - 126, 128 - 191,
+				192 - 223, 224 - 239 and 240 - 254). I don't know, maybe its not easier?<p>
+				A = 0xxxxxxx<br>
+				B = 10xxxxxx<br>
+				C = 110xxxxx<br>
+				D = 1110xxxx<br>
+				E = 1111xxxx This class is reserved for something...
+			</td></tr>
+			<tr><td colspan=2>
+				<b>Special Addresses:</b><p>
+				127.0.01 = Loopback address<br>
+				169.254.x.x = APIPA address (Automatic Private IP Address)<p>
+				APIPA is a feature in operating systems (such as Windows) that enables computers to automatically
+				self-configure an IP address and subnet mask when their DHCP server isn't reachable.<p>
+			</td></tr>
+			</table>
+                </td></tr>
+        </tr>
+	<tr>
+		<td>
+			<h2>Subnetting</h2>
+			A subnet, or subnetwork is a network inside a network. So, essentially a subnet is a network. Confused?
+			The function of a subnet mask is to differentiate the <b>network bits</b> from the <b>host bits</b> in an IP
+			address.
+			<p>
+			<center><img src=./pics/what_about_subnetting.jpg width=60%></center><p>
+		</td>
+	</tr>
+		<td>
+			Well, if that didn't make you want to drink, maybe this next part will. And, if this next part doesn't make
+			you want to chug some whiskey, the part after this most certainly will. Actually, I'm going to work through
+			this tid-bit of information with a "cheet sheet". It's not my cheet sheet and I'm not sure who came up with
+			it, because I've seen it several different places. Two thumbs up to the person that created it!<p>
+
+			Take a gander at the image below. If you have an IPv4 address and a CIDR or Subnet mask, you should be able to 
+			figure out several other things (7 to be exact): The <b>Network ID,</b> the <b>Broadcast IP, </b> the <b>Firts Host IP,</b>
+			the <b>Last Host IP,</b> the <b>Next Network,</b> the <b># of IPs,</b> and the <b>CIDR or subnet</b><p>
+
+			<center><img src="./pics/subnetting_image_1.jpg" width= 50%></center><p>
+
+			<a href=https://techlibrary.hpe.com/docs/otlink-wo/CIDR-Conversion-Table.html>Advanced CDIR notation table</a><p>
+		</td>
+	<tr>
+		<td>
+			<hr>
+			If my ramblings are confusing to you then you know how I felt when I started this journey. Here's a web site I
+			used to help me figure things out...Practice subnetting IPv4 <a href="https://subnetipv4.com/"><b>subnetipv4.com</b></a>
+			oh yeah, there are a bunch of YouTube videos that can help ease the pain as well.
+			<hr>
+		</td>
+	</tr>
+</table>
+<p>
+</center>
+</body>
+
+</html>
+
+

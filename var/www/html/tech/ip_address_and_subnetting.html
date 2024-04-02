@@ -1,11 +1,12 @@
 <head>
 <title>Below Ground</title>
 </head>
+<body>
 <center>
 <table width=1100 border=0>
         <tr>
                 <td colspan=2><hr>
-                        <h3><b>Below Ground - Subnetting, IP addresses and likewise fun stuff</b></h3>
+                        <h3><b>Below Ground - IP address and Subnetting</b></h3>
                         <a href="../index.html">Ohashisan</a> |
                         <a href="../bloghts/bloghts.html">Bloghts</a> |
                         <a href="../certs/certs.html">Certs</a> |
@@ -23,8 +24,10 @@
 			<h2>IP Addresses</h2>
 			There's a lot of stuff involved with IP addresses and it's not the easiest part of networking... There's 
 			the binary system, the base(2) system, the decimal system, there are bits and bytes, there are
-			octets, and a few other things involved with getting one computer to communicate with antother. A couple things
-			to remember before we get started.<p> 
+			octets, there are classes A, B, C, D and E, and a few other things involved with getting one computer 
+			to communicate with antother.<p>
+
+			I'm sure I left a few things out, or just forgot to mention so we'll use what I have listed to get started.<p>
 
 			<li>1 binary number is a "bit" (0 or 1).
 			<li>8 bits = 1 byte (00000000 or 11111111).
@@ -37,7 +40,7 @@
 			(= 128), then divide the quotient in half 7 times, then put each result in its own column (like the table
 			below) you'll have everything you need to convert binary to decimal for each octet in an IPv4 address.<p>
 
-			<p><center><img src="../tech/pics/ip_addressing.jpg" width=40%></center><p>
+			<p><center><img src="./pics/ip_addressing.jpg" width=40%></center><p>
 
 			There are a couple ranges when it comes to Public ("routable") IP addresses -vs- Private IP addresses
 			("non-routable"). I try to show those ranges in the table below.
@@ -63,6 +66,16 @@
 				E. Who ever heard of class E?<p>
 			</td></tr>
 			<tr><td colspan=2>
+				If you're familiar with converting decimal to binary, there may be an easier way to figure out what class
+				an IP address is...at least for me it's easier than trying to remember class ranges (1 - 126, 128 - 191,
+				192 - 223, 224 - 239 and 240 - 254). I don't know, maybe its not easier?<p>
+				A = 0xxxxxxx<br>
+				B = 10xxxxxx<br>
+				C = 110xxxxx<br>
+				D = 1110xxxx<br>
+				E = 1111xxxx This class is reserved for something...
+			</td></tr>
+			<tr><td colspan=2>
 				<b>Special Addresses:</b><p>
 				127.0.01 = Loopback address<br>
 				169.254.x.x = APIPA address (Automatic Private IP Address)<p>
@@ -79,7 +92,7 @@
 			The function of a subnet mask is to differentiate the <b>network bits</b> from the <b>host bits</b> in an IP
 			address.
 			<p>
-			<center><img src=../tech/pics/what_about_subnetting.jpg width=60%></center><p>
+			<center><img src=./pics/what_about_subnetting.jpg width=60%></center><p>
 		</td>
 	</tr>
 		<td>
@@ -92,16 +105,17 @@
 			figure out several other things (7 to be exact): The <b>Network ID,</b> the <b>Broadcast IP, </b> the <b>Firts Host IP,</b>
 			the <b>Last Host IP,</b> the <b>Next Network,</b> the <b># of IPs,</b> and the <b>CIDR or subnet</b><p>
 
-			<center><img src="../tech/pics/subnetting_image_1.jpg" width= 50%></center><p>
+			<center><img src="./pics/subnetting_image_1.jpg" width= 50%></center><p>
 
 			<a href=https://techlibrary.hpe.com/docs/otlink-wo/CIDR-Conversion-Table.html>Advanced CDIR notation table</a><p>
 		</td>
 	<tr>
 		<td>
 			<hr>
-			If my ramblings are confusing to you then you know how I felt when I started this journey. Here's a web site I
-			used to help me figure things out...Practice subnetting IPv4 <a href="https://subnetipv4.com/"><b>subnetipv4.com</b></a>
-			oh yeah, there are a bunch of YouTube videos that can help ease the pain as well.
+			If my ramblings are confusing then you know how I felt when I started this journey. Here's a web site I
+			used to help me figure things out. This site has some really good, short videos that explain all of the things you need
+			to understand about subnetting and it has a cool subnetting calculator that generates random IP addresses so you can practice.<p>
+			<b>Practice subnetting IPv4 <a href="https://subnetipv4.com/">subnetipv4.com</b></a>
 			<hr>
 		</td>
 	</tr>
@@ -111,26 +125,5 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
