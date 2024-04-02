@@ -21,7 +21,7 @@ while True:
               new_acronym += "<meta http-equiv=\"refresh\" content=\"5\">"
               new_acronym += "</head>"
               new_acronym += "<table width=800 border=0><tr><td><h4>" + str(j) + " of " + str(number_of_lines) \
-			     + " <a href=/index.html>Home</a>" \
+			     + " <a href=../index.html>Home</a>" \
 			     + "</h4><br><font size=5 color=blue>" + str(acronymn) + "</font></td></tr></table>"
               html_file.write(new_acronym)
               html_file.close()
@@ -33,7 +33,7 @@ while True:
               new_definition += "<meta http-equiv=\"refresh\" content=\"10\">"
               new_definition += "</head>"
               new_definition += "<table width=800 border=0><tr><td><h4>" + str(j) + " of " + str(number_of_lines) \
-				+ " <a href=/index.html>Home</a>" \
+				+ " <a href=../index.html>Home</a>" \
 			        + "</h4><br><font size=5 color=blue>" + str(acronymn) + "</font>"
               new_definition += "<br><tr><td><font size=4>" + str(acronymn_definition) + "</font></td></tr></table>"
               html_file.write(new_definition)
