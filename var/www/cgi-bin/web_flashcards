@@ -1,6 +1,10 @@
 #!/usr/bin/python
 """
-
+    web_flashcards reads /var/www/html/docs/net_arconyms.txt and iterates through
+    each line with an acronym and acronym definition (delimited by a comma)then
+    displays each on a web page one at a time.
+    The acronym is the first field displayed on the web page for 5 seconds, then the
+    definition of that acronym is displayed for 10 seconds.
 """
 import time
 

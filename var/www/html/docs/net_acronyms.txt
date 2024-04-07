@@ -1,27 +1,27 @@
 1) PVC, Polyvinyl Chloride
 2) FEP, Fluoroethylenepropylene (Teflon)
 3) RG, Radio Grade (as in RG-6.. RG-58.. RG-59.. etc... Coaxial Cable).<br><center><img src=/tech/pics/rg-58.jpg>
-4) EMI, Electromagnetic Interference
+4) POP3, Post Office Protocol (TCP 110)
 5) LLC, Logical Link Control (LLC) Responsible for identifying Network Layer protocols and then encapsulating them, an LLC header tells the Data Link layer what to do with a packet once a frame is received.
-6) MAC, Media Access Control - Layer 2 (Data Link)
+6) SMTP TLS, Secure SMTP (TCP port 587)
 7) 802.1, LAN/MAN Management (and Media Access Control Bridges)
 8) CSU/DSU, Channel Service Unit/Data Service Unit
 9) 802.3, CSMA/CD Carrier Sense Multiple Access/Collision Detection (Ethernet) Remember.. 802.3 calls out anything DCE.. Data Communication Equipment (usually at the customer site). The services available to the DTE are most often accessed via the DCE device.. which is a modem or channel service unit/data service unit (CSU/DSU)
 10) 802.11, Wireless LAN
 11) 802.15, Wireless Personal Area Network
-12) DTE, Data Terminal Equipment. The services available to the DTE are most often accessed via the DCE device, which is a modem or channel service unit/data service unit (CSU/DSU)
+12) IMAP (4),Instant Message Access Protocol (TCP 143). IMAPv4 supports Kerberos authentication.
 13) Windowing, Windows are used to control the amount of outstanding...unacknowledged data segements. It's important to understand that the size of the window controls how much information is transferred from one end to the other. Some protocols quantify information by observing the number of packets...TCP/IP measures it by conunting the number of bytes.
-14) RIP - RIPv2, Routing Information Protocol
+14) RIP - RIPv2, Routing Information Protocol, both are Distance Vector protocols.
 15) EIGRP, Enhanced Interior Gateway Routing Protocol 
-16) OSPF, Open Shortest Path First
+16) SMTP, Simple Mail Transport Protocol Port <b>25</b>
 17) Route-Update Packets, These are used to update neighboring routers about the networks connected to all routers within the internetwork.
 18) DCE, Data Communication Equipment (usually at the customer site). The services available to the DTE are most often accessed via the DCE device, which is a modem or channel service unit/data service unit (CSU/DSU)
 19) EIGRP, Enhanced Interior Gateway Routing Protocol is an advanced distance-vector routing protocol that is used for automating routing decisions and configuration.
-20) OSPF, Open Shortest Path First. OSPF is also a Link-State routing protocol.
+20) OSPF, Open Shortest Path First. OSPF is a Link-State routing protocol.
 21) Route-Update Packets, These are used to update neighboring routers about the networks connected to all routers within the internetwork.
 22) Straight-Through Cable (T-568B + T-568B) Or (T-568A + T-568A), Used to connect:<li>Host to Switch or Hub.<li>Router to Switch or Hub.<br><center><img src=/tech/pics/T568B_RJ-45_wiring.jpg>
 23) Crossover Cable (T-568A to T-568B), Used to connect:<li>Switch to Switch<li>Hub to Hub<li>Host to Hub<li>Hub to SwitchRouter direct to Host.<br><center><img src=/tech/pics/cross-over_cable.jpg>
-24) AUP, Acceptable Usage Policy
+24) TFTP, Trivial File Transfer Protocol (UDP 69).
 25) Data Link Layer (2), The Data Link layer handles the physical transmission of data and handles error notification... network topology... and flow control.
 26) VTP, VLAN Trunking Protocol - a Cisco proprietary protocol that propagates the definition of VLANs on the whole network. VTP carries VLAN information to all of the Switches in a VTP domain. VTP advertisements can be sent over 802.1Q and ISL trunks.
 27) WPA, Wi-Fi Protected Access
@@ -30,3 +30,21 @@
 30) Name 5 different Routing Protocols, <li>RIP: Routing Information Protocol<br><li>IGRP: Interior Gateway Routing Protocol<br><li>OSPF: Open Shortest Path First<br><li>EIGRP: Enhanced Interior Gateway Routing Protocol<br><li>BGP: Bordar Gateway Protocol
 31) OSI Reference Model, The Open Systems Interconnection model is a conceptual framework for understanding how computers communicate with each other. There are seven layers in the OSI model and each layer has a specific job. The image below explains how data travels from one system to another.<br><center><img src=/tech/pics/osi_model.jpg>
 32) CIDR, Classless Inter Domain Routing. Also known as a "prefix notation".
+33) NTP, Network Time Protocol (TCP 123)
+34) DHCP, Dynamic Host Configuration Protocol (Server 67 - Client 68)
+35) DNS, Domain Name System (TCP & UDP 53)
+36) SFTP, Secure File Transfer Protocol (TCP 22)
+37) FTP, File Transfer Protocol (20 & 21)
+38) SNMPv3, Simple Network Management Protocol (TCP & UDP 161/162)
+39) LDAP, Lightweight Directory Access Protocol (TCP 389)
+40) LDAPS, Lightweight Directory Access Protocol (TCP 636)
+41) TLS/SSL, Transport Layer Security/Secure Socket Layer (TCP 995/465). Uses X.509 certificates.
+42) SMB, Server Message Block (TCP 445 and 139). For sharing access to files and printers.
+43) Syslog, TCP 514
+44) SMTP TLS, (TCP 587)
+45) IMAP SSL, (TCP 993)
+46) POP3 SSL, (TCP 995)
+47 SQLNet, Oracle (TCP 1521)
+48) MySQL, TCP 3306
+49) SIP, Session Initiation Protocol (VoIP UDP 5060 - TCP 5061)
+50) RTP, Real Time Transport Protocol (VoIP UDP 5004 - TCP 5005)
