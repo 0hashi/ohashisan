@@ -1,12 +1,41 @@
 <head>
-<title>Below Ground</title>
+<title>Ohashisan</title>
 </head>
 <body>
+<style>
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip .tooltiptext {
+  top: -20px;
+  left: 105%;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 300px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+</style>
 <center>
 <table width=1100 border=0>
 	<tr>
 		<td colspan=2><hr>
-			<h3><b>Below Ground - Protocols and Ports</b></h3>
+			<h3><b>Ohashisan - Protocols and Ports</b></h3>
 			<a href="../index.html">Home</a> |
 			<a href="../bloghts/bloghts.html">Bloghts</a> |
 			<!-- a href="../certs/certs.html">Certs</a --> |
@@ -18,20 +47,106 @@
                 <hr>
 		</td>
 	</tr>
+	</table>
+
+	<table border="0" width="1000">
+	<tr><td colspan="3">
+		The Internet Assigned Numbers Authority (<a href="https://www.iana.org/">IANA</a>) is responsible for global
+		coordination of the Internet Protocol addressing systems, as well as Autonomous System Numbers used for routing
+		internet traffic.
+
+		A full list of service names and protocol port numbers can be found here:
+		<a href="https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml">Names and Numbers</a>
+
+		<p>Hover over protocol name for definition</td></tr>
 	<tr>
 		<td>
-			<table width=800 border=1>
-			<tr>
-				<td>DNS</td><td>UDP/TCP 53</td><td>Converts hostnames/FQDNs to IP addresses. Also can convert IP addresses
-					to FQDNs if reverse lookup has been configured. Large DNS transfers may use TCP.</td>
-				<td></td><td></td><td></td>
-			</tr>
+			<table width=1000 border=1>
+				<tr>
+					<td width="150"><div class="tooltip"><span class="tooltiptext">Domain Name System</span>DNS</div></td>
+					<td width="180">UDP/TCP 53</td>
+					<td>Converts hostnames/FQDNs to IP addresses. Also can convert IP addresses
+						to FQDNs if reverse lookup has been configured. Large DNS transfers may use TCP.</td></td>
+				</tr>
+				<tr style="background-color:#D3D3D3">
+					<td><div class="tooltip"><span class="tooltiptext">Simple Mail Transfer Protocol</span>SMTP</div></td>
+					<td>TCP 25 - Clear<br>TCP 587  - TLS</td>
+					<td>Server to server email transfer. Email clients use this port
+						to send mail to a server.</td>
+				</tr>
+				</tr>
+				<tr>
+					<td><div class="tooltip"><span class="tooltiptext">Post Office Protocol v3</span>POP3</div></td>
+					<td>TCP 110 - Clear<br>TCP 995 - TLS</td>
+					<td>Post Office Protocol v3 - Other protocols used for clients to receive email.</td>
+				</tr>
+				</tr>
+				<tr style="background-color:#D3D3D3">
+					<td><div class="tooltip"><span class="tooltiptext">Internet Message Access Protocol v4</span>IMAP4</div></td>
+					<td>TCP 143 - Clear<br>TCP 993 - TLS</td>
+					<td>Includes management of email inbox from multiple
+						clients. If one client deletes an email, it's deleted on the server and removed from
+						other client inboxes.</td>
+				</tr>
+				<tr>
+					<td><div class="tooltip"><span class="tooltiptext">File Transfer Protocol</span>FTP</div></td>
+					<td>TCP 20<br>(Active mode (transfers)<p>TCP 21<br>(PUT, GET, MPUT, etc)</td>
+					<td>Transfers files between systems. Authenticates with username and password.</td>
+				</tr>
+				<tr style="background-color:#D3D3D3">
+					<td><div class="tooltip"><span class="tooltiptext">Trivial File Transfer Protocol</span>TFTP</div></td>
+					<td>UDP 69</td>
+					<td>Simple file transfer protocol, reads and writes files, no
+						authentication, no encryption, not used on production systems.</td>
+				</tr>
+				<tr>
+					<td><div class="tooltip"><span class="tooltiptext">Dynamic Host Configuration Protocol</span>DHCP</div></td>
+					<td>UDP 67 & 68 </td>
+					<td>Automatically assigns IP addresses and other configration
+						options like: subnet mask, default gateway, DNS settings, etc.</td>
+				</tr>
+				<tr style="background-color:#D3D3D3">
+					<td><div class="tooltip"><span class="tooltiptext">Simple Network Management Protocol</span>SNMP v1, 2 & 3</div></td>
+					<td>UDP 161</td>
+					<td>SNMP v3 is the latest and greatest version providing message integrity, authentication and encryption.</td>
+				</tr>
+				<tr>
+					<td><div class="tooltip"><span class="tooltiptext">Network Time Protocol</span>NTP</div></td>
+					<td>UDP 123</td>
+					<td>NTP ensures every device on the network has the same time. In most cases it's best to use pool.ntp.org.
+						Synchronizing the clocks on system is crucial to ensuring systems and applications work as expected.</td>
+				</tr>
+				<tr style="background-color:#D3D3D3">
+					<td><div class="tooltip"><span class="tooltiptext">Session Initiation Protocol</span>SIP</div></td>
+					<td>TCP 5060 & 5061</td>
+					<td>Voice over IP (VoIP) signaling. Used to setup and manage VoIP sessions (call, ring, hang up). Is
+						also used for video conferencing, instant messaging, file transfer and more...</td>
+				</tr>
+				<tr>
+					<td><div class="tooltip"><span class="tooltiptext">Server Message Block (CIFS)</span>SMB</div></td>
+					<td>TCP 445</td>
+					<td>Used for file and print sharing, AKA CIFS (Common Internet File System).</td>
+				</tr>
+				<!-- tr style="background-color:#D3D3D3">
+					<td><div class="tooltip"><span class="tooltiptext">...</span></div></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><div class="tooltip"><span class="tooltiptext">...</span></div></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr style="background-color:#D3D3D3">
+					<td><div class="tooltip"><span class="tooltiptext">...</span></div></td>
+					<td></td>
+					<td></td>
+				</tr -->
+
 			</table>
 		</td>
 	</tr>
 </table>
 
-</center>
 </body>
-
 </html>
