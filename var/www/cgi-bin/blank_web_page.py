@@ -44,7 +44,7 @@ table.center {\n\
             <h3><b>Ohashisan (AKA reddirt.lab)</b></h3>\n\
                 <a href=\"/\">Home</a> |\n\
                 <a href=\"/bloghts/\">Bloghts</a> |\n\
-                <a href=\"/certs/\">Certs</a> |\n\
+                <a href=\"/certs/\">Certifications</a> |\n\
                 <a href=\"/commo/\">Commo</a> |\n\
                 <a href=\"/google/\">Google Dorking</a> |\n\
                 <a href=\"/scripts/\">Scripts</a> |\n\
