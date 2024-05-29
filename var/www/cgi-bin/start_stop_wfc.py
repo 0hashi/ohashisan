@@ -1,12 +1,25 @@
 #!/usr/bin/python
 #
-# A simple admin script to manage the stop|start|status request for the web_flashcards
-# cgi-bin script.
+# Script: start_stop_wfc.py
+#
+# April 2024
+# 
+# This is an initialization script for the web_flashcards cgi-bin script. web_flashcards runs as a
+# daemon process and this script can be used to start, stop and check the status of the web_flashcards
+# process.
+#
+# See /var/www/cgi-bin/web_flashcards and /var/www/html/scripts/net_acronyms.html for more information
+# about this system.
+#
+# This script is symlinked as /usr/bin/wfc (web_flashcards).
+#
+# Usage: wfc start|stop|status 
+# 
+
 
 import sys
 import os
 import subprocess
-
 
 def usage():
     print("\nUsage: start_web_flashcards start|stop|status\n")
@@ -27,7 +40,7 @@ process_pid = process_pid.replace("\\n'", "")
 
 if action == "start":
     print("Starting web_flashcards")
-    cmd_exec = "nohup nice -5 /var/www/cgi-bin/web_flashcards &"
+    cmd_exec = "nohup nice -5 /var/www/cgi-bin/web_flashcards >/dev/null 2>&1 &"
     os.system(cmd_exec)
 
 elif action == "stop":
