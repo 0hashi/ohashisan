@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Ohashisan</title>
+<style>
+table, th, td {
+  border: 0px solid black;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 5px;
+}
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+</head>
+<body>
+<center>
+<table width="800">
+    <tr>
+        <td align="center">
+            <hr width="800">
+            <h3><b>Linux - install GNOME desktop</b></h3>
+                <a href="/">Home</a> |
+                <!-- a href="/bloghts/">Bloghts</a> | --> 
+                <a href="/certs/">Certifications</a> |
+                <!-- <a href="/commo/">Commo</a> | --> 
+                <a href="/google/">Google</a> |
+                <a href="/scripts/">Scripts</a> |
+                <a href="/tech/">Tech</a> |
+                <a href="http://t7mdxxegiaz3jxbk3n6j44eujasg2pjydfqoivm7ekwvcrouje3jucid.onion/thedarkside.html">The Dark Side</a>
+                <hr width="800">
+        </td>
+    </tr>
+</table>
+<p>
+<table width="800">
+    <tr>
+        <td valign="top" width="100" colspan="1">
+            <a href="../pics/ohashi.jpg"><img src="../pics/ohashi.jpg" width="100%"></a>
+        </td>
+        <td valign="top" colspan="2">
+            If you need a Desktop on your Linux system and you want to use an RDP application to connect to that Linux
+            system, but didn't install GNOME, or other desktop when installing the new system, you can install GNOME
+            (as root) after the system was created. These procedures were written for Fedora and will work similarly on
+            other Linux distro's, using different commands.
+            <p>
+            As root, launch a terminal on your Linux system and follow the procedures below. If you don't want to use
+            root, or don't have access to root, you can prefix "sudo" to the commands.<p>
+
+            1. dnf -y group install "Basic Desktop" GNOME<p>
+
+            &emsp; Install XRPD on Fedora (as root):<p>
+
+            2. Install the XRDP package<p>
+
+            &emsp;    dnf -y install xrdp tigervnc-server<p>
+
+            3. Enable the XRDP daemon<p>
+
+            &emsp;    systemctl enable --now xrdp<p>
+
+            4. Open port 3389 permanently, if firewalld is running and the port is not already opened.<p>
+
+            &emsp;    firewall-cmd --add-port=3389/tcp && firewall-cmd --runtime-to-permanent<p>
+
+            5. Enable and Start xrdp<p>
+
+            &emsp;    a. systemctl enable xrdp<br>
+            &emsp;    b. systemctl start xrdp<br>
+            <p>
+            6. Now logon with a basic user account and create an .initxrc file for that user:<p>
+
+            &emsp;&emsp;echo "/usr/bin/gnome-session" >> ~/.xinitrc<p>
+
+            &emsp;&emsp;&emsp;    Or, for classic mode:<p>
+
+            &emsp;&emsp;echo "env GNOME_SHELL_SESSION_MODE=classic /usr/bin/gnome-session" >> ~/.xinitrc<p>
+
+	        ** NOTE: one or the other of the above, not both.<p>
+
+            7. Start the Xvnc server:<p>
+
+            &emsp;    startx &<p>
+
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" align="center" width="100" colspan="1">
+            <img src="../pics/me_and_pezz_round.jpg" width="100%"><br>
+            Road Dog Pebbs
+        </td>
+        <td colspan="1">
+            NOTE: You can add "startx &" to the bottom of the users ~/.profile (.bash_profile, or whatever profile
+            for your default shell is) to start Xvnc when the user logs in. I always add more than just the “startx
+            &” command, a better way to do this is with something like the following:<p>
+
+            if ! pgrep -x "Xvnc" > /dev/null && ! pgrep -x "X" > /dev/null; then<br>
+            &emsp;echo "X server is not running" > /dev/null<br>
+            &emsp;startx &<br>
+            else<br>
+            &emsp;echo "X server is running" > /dev/null<br>
+            fi<p>
+
+            Now connect to Linux with your favorite RDP application.<p>
+            <img src="pics/gnome_desktop.jpg"><p>
+            <hr>
+            <p>
+        </td>
+    </tr>
+</table>
+</center>
+</body>
+</html>
