@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Ohashisan</title>
+<style>
+table, th, td {
+  border: 0px solid black;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+}
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+</head>
+<body>
+<center>
+<table width="800">
+    <tr>
+        <td align="center">
+            <hr width="800">
+            <h3><b>Enable remote connections to MySQL database</b></h3>
+                <a href="/">Home</a> |
+                <!-- a href="/bloghts/">Bloghts</a> | --> 
+                <a href="/certs/">Certifications</a> |
+                <!-- <a href="/commo/">Commo</a> | --> 
+                <a href="/google/">Google</a> |
+                <a href="/scripts/">Scripts</a> |
+                <a href="/tech/">Tech</a> |
+                <a href="http://t7mdxxegiaz3jxbk3n6j44eujasg2pjydfqoivm7ekwvcrouje3jucid.onion/thedarkside.html">The Dark Side</a>
+                <hr width="800">
+        </td>
+    </tr>
+</table>
+<p>
+<table width="800">
+    <tr>
+        <td valign="top" width="100" colspan="1">
+            <a href="../pics/ohashi.jpg"><img src="../pics/ohashi.jpg" width="100%"></a>
+        </td>
+        <td valign="top" colspan="2">
+            Remote connections to a MySQL database are not enabled by default. So, if you want to connect to a MySQL
+            database running on a Linux system from your Windows workstation (or some other remote scenario), you'll
+            need to modify the mysqld.cnf file. Here's how to edit the mysqld.cnf file in the MySQL configuration
+            directory.<p>
+
+            <hr>
+
+            <strong>1.</strong> On the Ubuntu MySQL system edit the mysql configuration file
+            (/etc/mysql/mysql.conf.d/mysqld.cnf) and change the following parameter values:<p>
+
+            bind-address            = 10.0.0.1, 10.0.0.2  # 0.0.0.0 will allow connections to this database from anywhere.<br>
+            mysqlx-bind-address     = 10.0.0.0  # This is for the X plugin. Not necessary for remote connections.<p>
+
+            &emsp;  a. Restart MySQL: systemctl restart mysql<p>
+
+            <hr>
+            <strong>2.</strong> Connect to MySQL as root and create a new user with a strong password and grant all
+            permissions (it is not good to grant ALL permissions, but for a test environment it will work).<p>
+
+            # mysql -u root -h localhost -p<br>
+            # Enter password:<p>
+
+            mysql> create user 'newuser'@'localhost' identified by 'password';<br>
+
+            Query OK, 0 rows affected (0.06 sec)<p>
+
+            mysql> grant all privileges on *.* to 'newuser'@'localhost' with grant option;<br>
+            Query OK, 0 rows affected (0.01 sec)<p>
+
+            mysql> create user 'paul'@'%' identified by 'password';<br>
+            Query OK, 0 rows affected (0.01 sec)<p>
+
+            mysql> grant all privileges on *.* to 'paul'@'%' with grant option;<br>
+            Query OK, 0 rows affected (0.00 sec)<p>
+
+            mysql> flush privileges;<br>
+            Query OK, 0 rows affected (0.01 sec)<p>
+
+            mysql><p>
+
+            <hr>
+            <strong>3.</strong> On the remote system (Windows) open MySQL Workbench, create a new database connection
+            to the remote MySQL database, test the connection, and connect.
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" align="center" width="100" colspan="1">
+            <img src="../pics/me_and_pezz_round.jpg" width="100%"><br>
+                Road Dog Pebbs
+        </td>
+        <td colspan="1">
+            <center><img src="pics/mysql_workbench.jpg" width="75%"></center><p>
+
+            <strong>4.</strong> Create a new database connection on the remote system.<p>
+            <center><img src="pics/mysql_workbench_remote_server_configuration.jpg" width="75%"></center><p>
+
+            <strong>5.</strong> Click the "Test Connection" to verify connection configuration.<p>
+            <center><img src="pics/mysql_workbench_test_connection.jpg"></center><p>
+
+            <strong>6.</strong> You can now see your new MySQL connection on the MySQL Workbench Home page.<p>
+            <center><img src="pics/mysql_verify_new_connection.jpg"></center><p>
+
+            <strong>7.</strong> Click on the new connection tile to connect to the remote MySQL database.<p>
+            <center><img src="pics/mysql_workbench_remote_server_connected.jpg" width="75%"></center>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" align="center" width="100" colspan="1">
+            <img src="pics/success_kid_fist.jpg" width="110%">
+        </td>
+        <td>
+            <strong>8.</strong> Test connecting to the remote MySQL database via a cmd prompt.<p>
+            &emsp;&emsp;  C:\Program Files\MySQL\MySQL Serve 8.0\bin> mysql -u user -h host -p <p>
+            <center><img src="pics/mysql_cmd_connect_remote_db.jpg"></center>
+            <hr>
+        </p>
+
+        </td>
+    </tr>
+</table>
+</center>
+</body>
+</html>
