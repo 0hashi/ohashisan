@@ -46,12 +46,12 @@ table.center {
         <td valign="top" colspan="2">
             Remote connections to a MySQL database are not enabled by default. So, if you want to connect to a MySQL
             database running on a Linux system from your Windows workstation (or some other remote scenario), you'll
-            need to modify the mysqld.cnf file. Here's how to edit the mysqld.cnf file in the MySQL configuration
-            directory.<p>
+            need to modify the mysqld.cnf file. Here are the needed modifications to the mysqld.cnf file in the MySQL
+            configuration directory.<p>
 
             <hr>
 
-            <strong>1.</strong> On the Ubuntu MySQL system edit the mysql configuration file
+            <strong>1.</strong> On the Linux MySQL system edit the mysql configuration file
             (/etc/mysql/mysql.conf.d/mysqld.cnf) and change the following parameter values:<p>
 
             bind-address            = 10.0.0.1, 10.0.0.2  # 0.0.0.0 will allow connections to this database from anywhere.<br>
