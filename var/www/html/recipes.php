@@ -54,9 +54,9 @@ table.center {
         <td colspan="1">
             <?php
             function listAllRecipes() {
-                $mysql_server = "localhost";
-                $mysql_user = "paul";
-                $mysql_pass = 'k31+ec$ub2K';
+                $mysql_server = "database";
+                $mysql_user = "user";
+                $mysql_pass = 'password';
                 $mysql_db = "ohashisan";
 
                 $conn = new mysqli($mysql_server, $mysql_user, $mysql_pass, $mysql_db);
