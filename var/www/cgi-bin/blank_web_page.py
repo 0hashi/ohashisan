@@ -43,10 +43,10 @@ table.center {\n\
             <hr width=\"800\">\n\
             <h3><b>Ohashisan (AKA reddirt.lab)</b></h3>\n\
                 <a href=\"/\">Home</a> |\n\
-                <a href=\"/bloghts/\">Bloghts</a> |\n\
-                <a href=\"/certs/\">Certifications</a> |\n\
-                <a href=\"/commo/\">Commo</a> |\n\
-                <a href=\"/google/\">Google Dorking</a> |\n\
+                <!-- a href=\"/bloghts/\">Bloghts</a> | --> \n\
+                <a href=\"/certs/\">Certificationss</a> |\n\
+                <!-- <a href=\"/commo/\">Commo</a> | --> \n\
+                <a href=\"/google/\">Google</a> |\n\
                 <a href=\"/scripts/\">Scripts</a> |\n\
                 <a href=\"/tech/\">Tech</a> |\n\
                 <a href=\"http://t7mdxxegiaz3jxbk3n6j44eujasg2pjydfqoivm7ekwvcrouje3jucid.onion/thedarkside.html\">The Dark Side</a>\n\
@@ -58,7 +58,7 @@ table.center {\n\
 <table width=\"800\">\n\
     <tr>\n\
         <td valign=\"top\" width=\"100\" colspan=\"1\">\n\
-            <a href=\"/pics/ohashi.jpg\"><img src=\"/pics/ohashi.jpg\" width=\"100%\"></a>\n\
+            <a href=\"../pics/ohashi.jpg\"><img src=\"../pics/ohashi.jpg\" width=\"100%\"></a>\n\
         </td>\n\
         <td valign=\"top\" colspan=\"2\">\n\
             Left blank intentionally.\n\
@@ -66,7 +66,7 @@ table.center {\n\
     </tr>\n\
     <tr>\n\
         <td valign=\"top\" align=\"center\" width=\"100\" colspan=\"1\">\n\
-            <img src=\"/pics/me_and_pezz_round.jpg\" width=\"100%\"><br>\n\
+            <img src=\"../pics/me_and_pezz_round.jpg\" width=\"100%\"><br>\n\
                 Road Dog Pebbs\n\
         </td>\n\
         <td colspan=\"1\">\n\
