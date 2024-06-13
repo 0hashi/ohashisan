@@ -41,7 +41,8 @@ table.center {
 <table width="800">
 	<tr>
 		<td valign="top" width="100" colspan="1">
-			<a href="./pics/ohashi.jpg"><img src="./pics/ohashi.jpg" width="100%"></a>
+			<a href="./pics/ohashi.jpg"><img src="./pics/ohashi.jpg" width="100%"></a><p>
+                        <a href="/recipes/recipes.php">Recipes</a>
 		</td>
 		<td valign="top" colspan="2">
 		<p>
