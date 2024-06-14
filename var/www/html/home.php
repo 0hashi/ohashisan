@@ -74,7 +74,7 @@ table.center {
 			Road Dog Pebbs
 		</td>
 		<td colspan="1" valign="top" align="center">
-			<h3>My two most favorite creatures, ever! Pebbles and Boogie.</h3>
+			<h3>My two most favorite creatures, ever! Pebbles and Boogie</h3>
 			<p>
 			<img src="./pics/pebbles_small.png">&nbsp;&nbsp;&nbsp;&nbsp;<img src="./pics/boogie_small.png">
 		</td>
@@ -99,6 +99,15 @@ table.center {
 			of mine found him wandering the streets of Fontana, California, and for some reason, he thought I needed a
 			dog. He was exactly right!
 		</p>
+                <p>
+                        <center><h3><strong>My favorite person, my best friend and the love of my life</h3><img src="pics/me_and_hope_small.jpg">
+                        <br>Our favorite place, outside of the VFW, is Cellermans (2024).</strong></center><p>
+                        And, last but not least, my amazing wife. Our journey together started in 2015 at the American Legion Post 328 in
+                        California. Since then, we've traveled through Arizona and New Mexico, eventually settling in Texas. Like most
+                        couples, we've had our ups and downs, our ins and outs, and sometimes our differences. Yet, we've stuck together
+                        like two peas in a pod.
+                        <hr>
+                </p>
 		</td>
 	</tr>
 
