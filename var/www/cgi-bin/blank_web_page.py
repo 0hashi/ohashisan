@@ -11,13 +11,14 @@ import re
 
 html_root = "/var/www/html"
 
-page_name = input("Enter name for web page: ")
+page_name = input("Enter name for web page (something.php|html: ")
 page_folder = input("Enter web page folder: ")
 html_file = open(html_root + '/' + page_folder + '/' + page_name, mode="w")
 
 new_page = ("<!DOCTYPE html>\n\
 <html lang=\"en\">\n\
 <head>\n\
+<meta charset=\"UTF-8\">\n\
 <title>Ohashisan</title>\n\
 <style>\n\
 table, th, td {\n\
@@ -76,6 +77,9 @@ table.center {\n\
     </tr>\n\
 </table>\n\
 </center>\n\
+<footer>\n\
+    <em>&copy; ohashisan.com</em>\n\
+</footer>\n\
 </body>\n\
 </html>\n\
 ")
