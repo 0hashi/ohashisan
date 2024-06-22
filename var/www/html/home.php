@@ -9,7 +9,7 @@ table, th, td {
 }
 
 th, td {
-  padding: 5px;
+  padding: 10px;
 }
 
 table.center {
@@ -37,11 +37,13 @@ table.center {
 		</td>
 	</tr>
 </table>
-<p></p>
+<p>
 <table width="800">
 	<tr>
 		<td valign="top" width="100" colspan="1">
 			<a href="./pics/ohashi.jpg"><img src="./pics/ohashi.jpg" width="100%"></a><p>
+                The kanji above (Ohashi) means 'big bridge.' However, Google seems to confuse it with (ohashi),
+                which means 'honorable chopsticks.'<p>
                         <a href="/recipes/recipes.php">Recipes</a>
 		</td>
 		<td valign="top" colspan="2">
@@ -100,8 +102,8 @@ table.center {
 			dog. He was exactly right!
 		</p>
                 <p>
-                        <center><h3><strong>My favorite person, my best friend and the love of my life</h3><img src="pics/me_and_hope_small.jpg">
-                        <br>Our favorite place, outside of the VFW, is Cellermans (2024).</strong></center><p>
+                        <p style="text-align: center;>"><h3><strong>My favorite person, my best friend and the love of my life</h3><img src="pics/me_and_hope_small.jpg">
+                        <br>Our favorite place, outside of the VFW, is Cellermans (2024).</strong></p>
                         And, last but not least, my amazing wife. Our journey together started in 2015 at the American Legion Post 328 in
                         California. Since then, we've traveled through Arizona and New Mexico, eventually settling in Texas. Like most
                         couples, we've had our ups and downs, our ins and outs, and sometimes our differences. Yet, we've stuck together
