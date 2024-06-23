@@ -22,10 +22,10 @@ table.center {
 
 <?php
 
-$mysql_server = "host";
-$mysql_user = "user";
-$mysql_pass = 'passwd';
-$mysql_db = "database";
+$mysql_server = "";
+$mysql_user = "";
+$mysql_pass = '';
+$mysql_db = "";
 
                     /* ---------- Function to list all recipes ----------*/
 function listAllRecipes($mysql_server, $mysql_user, $mysql_pass, $mysql_db) {
